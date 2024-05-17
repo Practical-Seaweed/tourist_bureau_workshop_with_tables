@@ -113,7 +113,34 @@ window.onload = function () {
 
 function initCategoriesDropdown() {
 
-    
+    // [ let's get a hold of the dropdown for the categories from the activites.html ]
+    let categoriesDropdown = document.querySelector("#categoriesSelect")
+
+    let defaultOption = document.createElement("option");
+
+    // [ this is what we get back in JS when we ask for the selected value ]
+    defaultOption.value = "";
+
+    // [ this is what the user acutally selects from the dropdown ]
+    defaultOption.textContent = "Select a Category"
+
+    // [ add the option we createad to the dropdown ]
+    categoriesDropdown.appendChild(defaultOption);
+
+    categories.forEach( (category) => {
+
+        // [ create the new option for the category we are on in the loop ]
+        let newOption = document.createElement("option");
+
+        // [ set the value for the option ]
+        newOption.value = category;
+
+        // [ set the textContent that the user will see when choosing a category ]
+        newOption.textContent = category;
+
+        categoriesDropdown.appendChild(newOption);
+
+    } )
 
 }
 
