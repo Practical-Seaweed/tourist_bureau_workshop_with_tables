@@ -103,12 +103,63 @@ let activities = [
 
 window.onload = function () {
     
-
+    // [ run the code that populates the category dropdown ]
     initCategoriesDropdown();
 
+    // [  ]
+    let categoriesDropdown = document.querySelector("#categoriesSelect");
+
+    // [ make sure we run the code to work with the activites when the categories select ]
+    categoriesDropdown.addEventListener("change", getActivities);
 
 }
 
+function getActivities(event){
+
+    // [ get the selected category ]
+    let selectCategory = event.target.value;
+
+    let matchingActivites = activities.filter( (activity) => {
+
+        // [ cooler shorter way to do the test 
+        //   if the are = it returns true, if not it return false  ]
+        return activity.category === selectCategory;
+
+        // [ example of log form if statement ]
+        // if(activity.category === selectCategory){
+        //     return true;
+        // }
+        // return false;
+
+    } )
+
+    // [ get a hold of the table body so we can add rows to it for all the activites ]
+    let tableBody = document.querySelector("#activitiesTableBody");
+
+    // [ set the innerHTML to "" which clears it out ]
+    tableBody.innerHTML = "";
+
+    matchingActivites.forEach( (activity) => {
+
+        buildTableRow(tableBody, activity);
+
+    } )
+}   
+
+function buildTableRow(tableBody, data){
+
+    // [ create the row to hold the data ]
+    let newRow = tableBody.insertRow();
+
+    // [ loop over all the properties in the object and create a cell for them ]
+    for(let property in data){
+
+        let newTd = newRow.insertCell();
+        newTd.innerText = data[property];
+
+    }
+
+}
 
 
 function initCategoriesDropdown() {
